@@ -6,3 +6,5 @@ github:
       branch: develop
     - name: activiti-cloud-org-service
       branch: develop
+    - name: activiti-cloud-modeling-dependencies
+      branch: develop
