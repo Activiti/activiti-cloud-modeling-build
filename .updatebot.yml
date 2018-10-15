@@ -1,0 +1,8 @@
+github:
+  organisations:
+  - name: activiti
+    repositories:
+    - name: activiti-cloud-process-model-service
+      branch: develop
+    - name: activiti-cloud-org-service
+      branch: develop
