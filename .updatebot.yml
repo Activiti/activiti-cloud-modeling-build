@@ -4,8 +4,10 @@ github:
     repositories:
     - name: activiti-cloud-process-model-service
       branch: develop
+      useSinglePullRequest: true      
     - name: activiti-cloud-org-service
       branch: develop
+      useSinglePullRequest: true      
     - name: activiti-cloud-modeling-dependencies
       branch: develop
       useSinglePullRequest: true      
