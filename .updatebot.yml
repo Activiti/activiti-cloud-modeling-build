@@ -2,9 +2,9 @@ github:
   organisations:
   - name: activiti
     repositories:
-    - name: activiti-cloud-process-model-service
-      branch: develop
-      useSinglePullRequest: true      
+    # - name: activiti-cloud-process-model-service
+    #   branch: develop
+    #   useSinglePullRequest: true      
     - name: activiti-cloud-org-service
       branch: develop
       useSinglePullRequest: true      
