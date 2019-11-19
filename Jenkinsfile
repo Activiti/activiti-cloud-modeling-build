@@ -5,7 +5,6 @@ pipeline {
     environment {
       ORG               = 'activiti'
       APP_NAME          = 'activiti-cloud-modeling-build'
-      CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     }
     stages {
       stage('CI Build and push snapshot') {
@@ -23,7 +22,6 @@ pipeline {
             sh "mvn install"
             sh 'export VERSION=$PREVIEW_VERSION'
           }
-
         }
       }
       stage('Build Release') {
@@ -47,13 +45,11 @@ pipeline {
             sh "git commit -m \"Release \$(cat VERSION)\" --allow-empty"
             sh "git tag -fa v\$(cat VERSION) -m \"Release version \$(cat VERSION)\""
             sh "git push origin v\$(cat VERSION)"
-
           }
           container('maven') {
             sh 'mvn clean deploy -DskipTests'
-
+              
             sh 'export VERSION=`cat VERSION`'
-
 
             sh "updatebot push-version --kind maven org.activiti.cloud.modeling.build:activiti-cloud-modeling-parent \$(cat VERSION) org.activiti.cloud.modeling.build:activiti-cloud-modeling-dependencies-parent \$(cat VERSION)"
             sh "updatebot update --merge false"
@@ -96,6 +92,13 @@ pipeline {
       }
     }
     post {
+        failure {
+           slackSend(
+             channel: "#activiti-community-builds",
+             color: "danger",
+             message: "activiti-cloud-modeling-build branch=$BRANCH_NAME is failed http://jenkins.jx.35.242.205.159.nip.io/job/Activiti/job/activiti-cloud-modeling-build"
+           )
+        } 
         always {
             cleanWs()
         }
